@@ -1,28 +1,27 @@
 class MyExtension {
-  /**
-   * Scratch will call this method *once* when the extension loads.
-   * This method's job is to tell Scratch things like the extension's ID, name, and what blocks it supports.
-   */
   getInfo() {
     return {
-      // `id` is the internal ID of the extension
-      // It should never change!
-      // If you choose to make an actual extension, please change this to something else.
-      // Only the characters a-z and 0-9 can be used. No spaces or special characters.
-      id: 'myextensionexample',
+      id: 'equal',
 
       // `name` is what the user sees in the toolbox
       // It can be changed without breaking projects.
-      name: 'Cool Extension',
+      name: 'More math',
 
       blocks: [
         {
-          // `opcode` is the internal ID of the block
-          // It should never change!
-          // It corresponds to the class method with the same name.
-          opcode: 'hello',
-          blockType: Scratch.BlockType.REPORTER,
-          text: 'Hello, world!'
+          opcode: 'Equal',
+          blockType: Scratch.BlockType.BOOLEAN,
+          text: '[ONE] is strictely equal to [TWO]'
+          arguments: {
+            ONE: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: 'First value'
+            },
+            TWO: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: 'Second value'
+            }
+          }
         }
       ]
     };
@@ -31,14 +30,11 @@ class MyExtension {
   /**
    * Corresponds to `opcode: 'hello'` above
    */
-  hello() {
-    // You can just return a value: any string, boolean, or number will work.
-    // If you have to perform an asynchronous action like a request, just return a Promise.
-    // The block will wait until the Promise resolves and return the resolved value.
-    return 'Hello, world!';
+  Equal(args) {
+    return args.ONE == args.TWO;
   }
 }
 
 // Call Scratch.extensions.register to register your extension
 // Make sure to register each extension exactly once
-Scratch.extensions.register(new MyExtension());
+Scratch.extensions.register(new Moremaths());
