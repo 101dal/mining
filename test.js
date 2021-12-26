@@ -1,4 +1,4 @@
-class MyExtension {
+class MoreMaths {
   getInfo() {
     return {
       id: 'equal',
